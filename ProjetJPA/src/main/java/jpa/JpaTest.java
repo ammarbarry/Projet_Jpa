@@ -19,6 +19,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import domain.Chauffage;
+import domain.Device;
 import domain.EquipElectronic;
 import domain.Personne;
 import domain.Residence;
@@ -51,12 +52,16 @@ public class JpaTest {
 			manager.persist(r2);
 			manager.persist(r3);
 			
-			Chauffage c = new Chauffage("500kw/h", r1);
+			Device c = new Chauffage();
+			c.setConsoMoyenne("500kw/h");
+			c.setResidence(r1);
 			manager.persist(c);
 			
-			EquipElectronic e = new EquipElectronic("600kw/h", r2);
+			Device e = new EquipElectronic();
+			e.setConsoMoyenne("600kw/h");
+			e.setResidence(r2);
 			manager.persist(e);
-			
+		
 		
 		} catch (Exception e) {
 			e.printStackTrace();

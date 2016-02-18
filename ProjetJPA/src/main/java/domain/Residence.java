@@ -13,6 +13,7 @@ package domain;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,8 +26,7 @@ public class Residence {
 	private long id;
 	private double taille;
 	private int nbrePiece;
-	private Set<Chauffage> chauffages;
-	private Set<EquipElectronic> equipElectronics;
+	private Set<Device> devices;
 	private Personne pers;
 	
 	public Residence(){
@@ -73,24 +73,6 @@ public class Residence {
 		this.nbrePiece = nbrePiece;
 	}
 	
-	@OneToMany(mappedBy = "residence", cascade = CascadeType.PERSIST)
-	public Set<Chauffage> getChauffages() {
-		return chauffages;
-	}
-
-	public void setChauffages(Set<Chauffage> chauffages) {
-		this.chauffages = chauffages;
-	}
-	
-	@OneToMany(mappedBy = "residence", cascade = CascadeType.PERSIST)
-	public Set<EquipElectronic> getEquipElectronics() {
-		return equipElectronics;
-	}
-
-	public void setEquipElectronics(Set<EquipElectronic> equipElectronics) {
-		this.equipElectronics = equipElectronics;
-	}
-
 	@Override
 	public String toString() {
 		return "Residence [taille=" + taille + ", nbrePiece=" + nbrePiece + "]";
@@ -103,6 +85,15 @@ public class Residence {
 
 	public void setPersonne(Personne personne) {
 		this.pers = personne;
+	}
+
+	@OneToMany(mappedBy = "residence", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	public Set<Device> getDevices() {
+		return devices;
+	}
+
+	public void setDevices(Set<Device> devices) {
+		this.devices = devices;
 	}
 
 	
