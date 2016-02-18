@@ -1,14 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-    Copyright (c) 2016 IBM Corporation and others.
-    All rights reserved. This program and the accompanying materials
-    are made available under the terms of the Eclipse Public License v1.0
-    which accompanies this distribution, and is available at
-    http://www.eclipse.org/legal/epl-v10.html
-   
-    Contributors:
-        IBM Corporation - initial API and implementation
- -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -16,7 +6,19 @@
 	<groupId>test</groupId>
 	<artifactId>testjpa</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	
+	<!-- Question 1.a -->
+	<packaging>war</packaging>
+	
 	<dependencies>
+	<!-- Question 1.b -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			 <scope>provided</scope>			
+		</dependency>
+		
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
@@ -37,12 +39,21 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.36</version>
 		</dependency>
+		
+		<!-- Question 6.a les architectures Rest. -->
 		<dependency>
-    		<groupId>org.apache.tomcat</groupId>
-   			 <artifactId>tomcat-catalina</artifactId>
-   			 <version>7.0.47</version>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-servlet</artifactId>
+			<version>1.18.3</version>
 		</dependency>
-
+	 	 	
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+			<version>1.18.3</version>
+		</dependency>
+		
+		
 	<!-- 	<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
@@ -50,4 +61,18 @@
 		</dependency> -->
 
 	</dependencies>
+	<build>
+		<plugins>
+			<!-- * Start of user code for plugins -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<path>/</path>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
 </project>
