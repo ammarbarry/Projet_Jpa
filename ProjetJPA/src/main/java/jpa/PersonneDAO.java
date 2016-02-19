@@ -25,6 +25,11 @@ public class PersonneDAO {
 		tx = manager.getTransaction();	
 	}
 	
+	/**
+	 * 
+	 * @param personne
+	 * @return
+	 */
 	public JSONObject get(Personne personne){
 		try {
 			return new JSONObject()
@@ -58,7 +63,18 @@ public class PersonneDAO {
 			}
 			return json;
 		}
-		
+	 }
+	
+	/**
+	 * 
+	 * @param id
+	 * @return les infos de la personne dont l'id est passer en paramètre
+	 */
+	public JSONArray getPersonneById(long id){
+		String s = "SELECT e FROM Personne as e where e.id=:id";
+		Query q = manager.createQuery(s,Personne.class);
+		q.setParameter("id", id); 
+		return new JSONArray().put(get((Personne) q.getSingleResult()));
 	}
 	
 	
