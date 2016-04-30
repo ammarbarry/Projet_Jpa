@@ -7,17 +7,20 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 public class Residence {
 	
 	private long id;
 	private double taille;
 	private int nbrePiece;
 	private Set<Device> devices;
-	private Personne pers;
+	private Personne personne;
 	
 	public Residence(){
 		//this.devices = new HashSet<>();
@@ -35,7 +38,7 @@ public class Residence {
 		super();
 		this.taille = taille;
 		this.nbrePiece = nbrePiece;
-		this.pers = personne;
+		this.personne = personne;
 	}
 
 	@Id
@@ -69,16 +72,17 @@ public class Residence {
 		return "Residence [taille=" + taille + ", nbrePiece=" + nbrePiece + "]";
 	}
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="PERSON_ID")
 	public Personne getPersonne() {
-		return pers;
+		return personne;
 	}
 
 	public void setPersonne(Personne personne) {
-		this.pers = personne;
+		this.personne = personne;
 	}
 
-	@OneToMany(mappedBy = "residence", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "residence", cascade = CascadeType.PERSIST)
 	public Set<Device> getDevices() {
 		return devices;
 	}
@@ -90,11 +94,4 @@ public class Residence {
 	public void addDevice(Device d) {
 		devices.add(d);
 	}
-	
-	
-
-	
-	
-	
-
 }

@@ -39,7 +39,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.36</version>
 		</dependency>
-		
+		 <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.3</version>
+        </dependency>
 		<!-- Question 6.a les architectures Rest. -->
 		<dependency>
 			<groupId>com.sun.jersey</groupId>

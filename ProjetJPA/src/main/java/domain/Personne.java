@@ -20,8 +20,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 public class Personne {
 	
 		
@@ -83,9 +85,9 @@ public class Personne {
 			this.mail = mail;
 		}
 
-		@OneToMany(mappedBy = "personne", cascade = CascadeType.PERSIST, fetch=FetchType.LAZY)
-		@Column
-		@ElementCollection(targetClass=Residence.class)
+		@OneToMany(mappedBy = "personne"/*, cascade = CascadeType.PERSIST, fetch=FetchType.LAZY*/)
+		//@Column
+		//@ElementCollection(targetClass=Residence.class)
 		public Set<Residence> getResidences() {
 			return residence;
 		}

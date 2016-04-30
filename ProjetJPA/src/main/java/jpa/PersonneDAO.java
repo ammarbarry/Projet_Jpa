@@ -65,6 +65,12 @@ public class PersonneDAO {
 		}
 	 }
 	
+	public List<Personne> getPersonAll()
+	{
+		String s = "SELECT e FROM Personne as e";
+		Query q = manager.createQuery(s,Personne.class);
+		return q.getResultList();
+	}
 	/**
 	 * 
 	 * @param id
@@ -77,7 +83,12 @@ public class PersonneDAO {
 		return new JSONArray().put(get((Personne) q.getSingleResult()));
 	}
 	
-	
+	public Personne add(Personne person){
+		tx.begin();
+		manager.persist(person);
+		tx.commit();
+		return person;
+	}
 	
 	
 
